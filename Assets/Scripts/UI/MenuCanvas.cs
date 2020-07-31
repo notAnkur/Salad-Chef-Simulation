@@ -15,11 +15,6 @@ public class MenuCanvas : MonoBehaviour
         SceneManager.LoadSceneAsync(2);
     }
 
-    public void StartMultiplayer()
-    {
-        SceneManager.LoadSceneAsync(3);
-    }
-
     public void ExitGame()
     {
         Application.Quit();
