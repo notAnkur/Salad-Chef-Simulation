@@ -27,6 +27,8 @@ public static class Constants
     public const float normalSpeed = 2.0f;
     public const float timePowerUp = 10.0f;
     public const float gameTime = 120.0f;
+    public const int customerMinWaitTime = 20;
+    public const int customerMaxWaitTime = 30;
 
     public const string Dustbin = "Dustbin";
     public const string SaladMixer = "SaladMixer";

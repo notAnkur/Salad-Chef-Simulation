@@ -631,6 +631,7 @@ GameObject:
   - component: {fileID: 142711519}
   - component: {fileID: 142711518}
   - component: {fileID: 142711517}
+  - component: {fileID: 142711520}
   m_Layer: 0
   m_Name: CustomerTable
   m_TagString: Untagged
@@ -712,6 +713,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142711515}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &142711520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142711515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a76b503ef6638184ca4e23ade386eddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CustomerSpawnPoints:
+  - {fileID: 840190973}
+  - {fileID: 1647714321}
+  - {fileID: 544793879}
+  CustomerPrefab: {fileID: 9162181139948688664, guid: 49d5506bd5ca09a4fb106a97a08d201a,
+    type: 3}
 --- !u!1 &267304726
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,6 +908,7 @@ MonoBehaviour:
   timer: {fileID: 114304875}
   pickupLabelContainer: {fileID: 564098558}
   eye: {fileID: 267304726}
+  scoreTextField: {fileID: 1322328706}
 --- !u!65 &284676389
 BoxCollider:
   m_ObjectHideFlags: 0

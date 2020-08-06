@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI timer;
     [SerializeField] GameObject pickupLabelContainer;
     [SerializeField] GameObject eye;
+    [SerializeField] TextMeshProUGUI scoreTextField;
 
     //private
     private bool canPlayerMove;
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         ShootRaycast();
         if (!canPlayerMove) FindObjectOfType<GameMenu>().GameOver(playerScore);
+        scoreTextField.SetText($"{playerScore}");
     }
 
     void FixedUpdate()
@@ -161,7 +163,7 @@ public class PlayerController : MonoBehaviour
             {
                 Cart.Clear();
                 ModifyScore(-10);
-                messageController.DisplayMessage("Items removed from Cart.");
+                messageController.DisplayMessage("Cart cleared.");
             }
             else
             {
@@ -179,7 +181,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void ModifyScore(int score)
+    public void ModifyScore(int score)
     {
         playerScore += score;
     }
