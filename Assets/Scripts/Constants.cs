@@ -12,7 +12,6 @@ public static class Constants
     public const KeyCode KeyRotateLeft1 = KeyCode.Q;
     public const KeyCode KeyRotateRight1 = KeyCode.E;
     public const KeyCode KeyPick1 = KeyCode.F;
-    public const KeyCode KeyDrop1 = KeyCode.R;
 
     // player2 controls
     public const KeyCode KeyForward2 = KeyCode.UpArrow;
@@ -22,13 +21,16 @@ public static class Constants
     public const KeyCode KeyRotateLeft2 = KeyCode.RightShift;
     public const KeyCode KeyRotateRight2 = KeyCode.RightControl;
     public const KeyCode KeyPick2 = KeyCode.Return;
-    public const KeyCode KeyDrop2 = KeyCode.Backspace;
 
     // common
     public const float powerupTime = 2.0f;
     public const float normalSpeed = 2.0f;
     public const float timePowerUp = 10.0f;
     public const float gameTime = 120.0f;
+
+    public const string Dustbin = "Dustbin";
+    public const string SaladMixer = "SaladMixer";
+    public const string Salad = "Salad";
 
     // raw vege
     public const string Tomato = "Tomato";

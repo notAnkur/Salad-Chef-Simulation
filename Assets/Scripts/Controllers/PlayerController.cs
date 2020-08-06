@@ -12,28 +12,39 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject pickupLabelContainer;
     [SerializeField] GameObject eye;
 
-    private bool canPlayerMove = false;
+    //private
+    private bool canPlayerMove;
     private float gameTime;
-    private float playerSpeed = Constants.normalSpeed;
+    private float playerSpeed;
+    private int playerScore;
+    private MessageController messageController;
 
-    private List<GameObject> Cart;
+    private List<string> Cart;
 
     private void Awake()
     {
         canPlayerMove = true;
         gameTime = Constants.gameTime;
+        playerSpeed = Constants.normalSpeed;
+        playerScore = 0;
+        messageController = FindObjectOfType<MessageController>();
     }
 
     void Start()
     {
-        Cart = new List<GameObject>(2);
+        Cart = new List<string>(2);
+    }
+
+    private void Update()
+    {
+        ShootRaycast();
+        if (!canPlayerMove) FindObjectOfType<GameMenu>().GameOver(playerScore);
     }
 
     void FixedUpdate()
     {
         PlayerMovement();
         UpdateTimer();
-        ShootRaycast();
     }
 
     private void PlayerMovement()
@@ -76,24 +87,37 @@ public class PlayerController : MonoBehaviour
     private void ShootRaycast()
     {
         RaycastHit hit;
-        Debug.Log("attempting");
         Debug.DrawRay(eye.transform.position, eye.transform.forward * 10, Color.red);
         if (Physics.Raycast(eye.transform.position, eye.transform.forward, out hit, 10))
         {
-            Debug.Log(hit.transform.name);
-            Debug.Log(hit.transform.tag);
             if (hit.transform.CompareTag("Vegetable"))
             {
-                pickupLabelContainer.SetActive(true);
-                pickupLabelContainer.GetComponentInChildren<TextMeshProUGUI>().SetText($"F to pickup {hit.transform.name}");
-
-                // handle pickup and drop
+                DisplayPickupMessage(hit);
+                // handle pickup
+                HandleObject(hit.transform.gameObject);
+            } else if (hit.transform.name.Equals(Constants.Dustbin))
+            {
+                DisplayPickupMessage(hit);
+                DustbinHandler();
+            } else if (hit.transform.name.Equals(Constants.SaladMixer))
+            {
+                DisplayPickupMessage(hit);
+                SaladMixerHandler(hit.transform.GetComponent<SaladMixerController>());
+            } else if(hit.transform.CompareTag(Constants.Salad))
+            {
+                DisplayPickupMessage(hit);
                 HandleObject(hit.transform.gameObject);
             }
         } else
         {
             pickupLabelContainer.SetActive(false);
         }
+    }
+
+    private void DisplayPickupMessage(RaycastHit hit)
+    {
+        pickupLabelContainer.SetActive(true);
+        pickupLabelContainer.GetComponentInChildren<TextMeshProUGUI>().SetText($"F to interact with {hit.transform.name}");
     }
 
     private void HandleObject(GameObject interactableObject)
@@ -106,16 +130,58 @@ public class PlayerController : MonoBehaviour
 
     private void PickObject(GameObject interactableObject)
     {
-        if(Cart.Count > 2)
+        if (Cart.Count >= 2)
         {
+            // player cant have more than two items in the cart
+            messageController.DisplayMessage("Cart full");
             return;
         }
 
         if(interactableObject.CompareTag("Vegetable"))
         {
             // item is raw vege
-
+            Cart.Add(interactableObject.transform.name);
+            messageController.DisplayMessage($"{interactableObject.transform.name} added to Cart");
+        } else if(interactableObject.CompareTag(Constants.Salad))
+        {
+            // item is salad
+            Cart.Add(interactableObject.GetComponentInChildren<TextMesh>().text);
+            Debug.Log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            Debug.Log(interactableObject.GetComponentInChildren<TextMesh>().text);
+            messageController.DisplayMessage($"{interactableObject.GetComponentInChildren<TextMesh>().text} added to Cart");
+            Destroy(interactableObject);
         }
+    }
+
+    private void DustbinHandler()
+    {
+        if(Input.GetKeyDown(Constants.KeyPick1))
+        {
+            if (Cart.Count > 0)
+            {
+                Cart.Clear();
+                ModifyScore(-10);
+                messageController.DisplayMessage("Items removed from Cart.");
+            }
+            else
+            {
+                messageController.DisplayMessage("Cart is already empty.");
+            }
+        }
+    }
+
+    private void SaladMixerHandler(SaladMixerController saladMixerController)
+    {
+        if(Input.GetKeyDown(Constants.KeyPick1))
+        {
+            saladMixerController.MakeSalad(Cart);
+            Cart.Clear();
+        }
+    }
+
+    private void ModifyScore(int score)
+    {
+        playerScore += score;
     }
 
 }
