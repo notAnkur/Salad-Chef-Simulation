@@ -26,6 +26,7 @@ public class CustomerController : MonoBehaviour
     public void SetCustomerOrder(string order)
     {
         CustomerOrder = order;
+        transform.Find("CustomerOrder").GetComponent<TextMesh>().text = order;
     }
 
     private void UpdateTimer()
@@ -38,7 +39,7 @@ public class CustomerController : MonoBehaviour
                 messageController.DisplayMessage("Customer not served in time.");
             }
 
-            Destroy(gameObject);
+            DestroyCustomer();
         }
 
         CustomerTime -= Time.deltaTime;
@@ -46,19 +47,29 @@ public class CustomerController : MonoBehaviour
         CustomerTimer.GetComponent<TextMesh>().text = ((Math.Round(CustomerTime)).ToString() + "s");
     }
 
-    public void ServeOrder(string orderServed, GameObject ServedBy)
+    public void ServeOrder(List<string> Cart, GameObject ServedBy)
     {
         PlayerController OrderServedBy = ServedBy.GetComponent<PlayerController>();
-        if(orderServed.Equals(CustomerOrder))
+        if(Cart.Contains(CustomerOrder))
         {
+            Cart.Remove(CustomerOrder);
+            OrderServedBy.UpdateCart(Cart);
             OrderServedBy.ModifyScore(50);
             messageController.DisplayMessage("Good Job!");
         } else
         {
             OrderServedBy.ModifyScore(-20);
-            messageController.DisplayMessage("Unhappy Customer :(");
+            Debug.Log($"Cart {Cart[0]}");
+            Debug.Log($"Order {CustomerOrder}");
+            messageController.DisplayMessage("Incorrect Order");
         }
 
+        DestroyCustomer();
+    }
+
+    private void DestroyCustomer()
+    {
+        FindObjectOfType<CustomerSpawner>().SpawnCustomer(transform.parent);
         Destroy(gameObject);
     }
 }

@@ -973,7 +973,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.017554728, y: 0.025735576, z: 0.016089309}
+  m_Size: {x: 0.02, y: 0.025735576, z: 0.02}
   m_Center: {x: -0.00019793678, y: -0.0008832053, z: -0.0056478404}
 --- !u!1 &411026395
 GameObject:
@@ -1356,7 +1356,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 500, y: 50}
+  m_SizeDelta: {x: 500, y: 80}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &564098560
 MonoBehaviour:
@@ -1638,8 +1638,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5435787e+30, y: 1.3958761e+10, z: 8.0937406e+11,
-    w: 6.7406024e+22}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2086,12 +2085,12 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 2b34a9d796929414ab0b7f8908754899,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.09
+      value: 2.26
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2b34a9d796929414ab0b7f8908754899,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.0758193
+      value: 1.22
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2b34a9d796929414ab0b7f8908754899,
         type: 3}
@@ -2155,7 +2154,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 7f176d920c0afcf479c431e470b4da23,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14
+      value: -13.73
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7f176d920c0afcf479c431e470b4da23,
         type: 3}
@@ -2165,7 +2164,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 7f176d920c0afcf479c431e470b4da23,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.41
+      value: -2.35
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7f176d920c0afcf479c431e470b4da23,
         type: 3}
@@ -2721,7 +2720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverContainer: {fileID: 2035885664}
-  scoreValue: {fileID: 0}
+  scoreValue: {fileID: 1812188074}
 --- !u!1 &1300615288
 GameObject:
   m_ObjectHideFlags: 0
@@ -2947,7 +2946,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.036364965, y: 0.11481543, z: 0.028459199}
+  m_Size: {x: 0.08, y: 0.11481543, z: 0.08}
   m_Center: {x: -0.00035892404, y: 0.004561547, z: 0.0007909923}
 --- !u!1 &1413769389
 GameObject:
@@ -3077,7 +3076,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.019802142, y: 0.027524985, z: 0.01576244}
+  m_Size: {x: 0.025, y: 0.027524985, z: 0.025}
   m_Center: {x: -0.000026425812, y: 0.003308894, z: 0.000091743656}
 --- !u!1001 &1427991107
 PrefabInstance:
@@ -3099,17 +3098,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 12a55631927e23849abc00710625cc1d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.78
+      value: -13.88
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 12a55631927e23849abc00710625cc1d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.38
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 12a55631927e23849abc00710625cc1d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.74
+      value: -6.9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 12a55631927e23849abc00710625cc1d,
         type: 3}

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Vegetable
   - Salad
+  - Customer
   layers:
   - Default
   - TransparentFX

@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MenuCanvas : MonoBehaviour
 {
+    [SerializeField] GameObject LoadingOverlay;
     public void StartSinglePlayer()
     {
+        LoadingOverlay.SetActive(true);
         SceneManager.LoadSceneAsync(1);
     }
 

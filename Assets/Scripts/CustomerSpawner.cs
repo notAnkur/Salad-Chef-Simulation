@@ -21,7 +21,7 @@ public class CustomerSpawner : MonoBehaviour
 
             //StartCoroutine(SpawnCustomer(CustomerSpawnPoints[customerIndex]));
             GameObject customer = Instantiate(CustomerPrefab, CustomerSpawnPoints[customerIndex], false);
-            customer.transform.Find("CustomerOrder").GetComponent<TextMesh>().text = GetRandomOrder();
+            customer.GetComponent<CustomerController>().SetCustomerOrder(GetRandomOrder());
         }
     }
 
@@ -30,26 +30,20 @@ public class CustomerSpawner : MonoBehaviour
         return ItemsList[random.Next(0, ItemsList.Count)]; // random int between [0, listSize)
     }
 
-    IEnumerator SpawnCustomer(Transform ParentTransform)
+    public void SpawnCustomer(Transform ParentTransform)
+    {
+        StartCoroutine(SpawnCustomerCoroutine(ParentTransform));
+    }
+
+    public IEnumerator SpawnCustomerCoroutine(Transform ParentTransform)
     {
         yield return new WaitForSeconds(new System.Random().Next(2, 6));
         
         if(ParentTransform.childCount == 0)
         {
             GameObject customer = Instantiate(CustomerPrefab, ParentTransform, false);
-            customer.transform.Find("CustomerOrder").GetComponent<TextMesh>().text = GetRandomOrder();
+            customer.GetComponent<CustomerController>().SetCustomerOrder(GetRandomOrder());
         }
 
-    }
-
-    private int CustomerCounter()
-    {
-        int TotalCustomers = 0;
-        foreach(Transform spawnTransform in CustomerSpawnPoints)
-        {
-            TotalCustomers += spawnTransform.childCount;
-        }
-
-        return TotalCustomers;
     }
 }

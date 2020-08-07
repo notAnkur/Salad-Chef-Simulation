@@ -82,8 +82,12 @@ public class PlayerController : MonoBehaviour
     private void UpdateTimer()
     {
         gameTime -= Time.deltaTime;
-        if (gameTime <= 0) canPlayerMove = false;
-        timer.SetText((Math.Round(gameTime)).ToString() + "s");
+        if (gameTime <= 0)
+        {
+            canPlayerMove = false;
+            Time.timeScale = 0;
+        }
+        else timer.SetText((Math.Round(gameTime)).ToString() + "s");
     }
 
     private void ShootRaycast()
@@ -105,10 +109,14 @@ public class PlayerController : MonoBehaviour
             {
                 DisplayPickupMessage(hit);
                 SaladMixerHandler(hit.transform.GetComponent<SaladMixerController>());
-            } else if(hit.transform.CompareTag(Constants.Salad))
+            } else if(hit.transform.CompareTag(Constants.SaladTag))
             {
                 DisplayPickupMessage(hit);
                 HandleObject(hit.transform.gameObject);
+            } else if(hit.transform.CompareTag(Constants.CustomerTag))
+            {
+                DisplayPickupMessage(hit);
+                HandleOrder(hit.transform.gameObject);
             }
         } else
         {
@@ -130,6 +138,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void HandleOrder(GameObject order)
+    {
+        if(Input.GetKeyDown(Constants.KeyPick1))
+        {
+            order.transform.GetComponent<CustomerController>().ServeOrder(Cart, gameObject);
+        }
+    }
+
     private void PickObject(GameObject interactableObject)
     {
         if (Cart.Count >= 2)
@@ -144,15 +160,19 @@ public class PlayerController : MonoBehaviour
             // item is raw vege
             Cart.Add(interactableObject.transform.name);
             messageController.DisplayMessage($"{interactableObject.transform.name} added to Cart");
-        } else if(interactableObject.CompareTag(Constants.Salad))
+        } else if(interactableObject.CompareTag(Constants.SaladTag))
         {
             // item is salad
             Cart.Add(interactableObject.GetComponentInChildren<TextMesh>().text);
-            Debug.Log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
             Debug.Log(interactableObject.GetComponentInChildren<TextMesh>().text);
             messageController.DisplayMessage($"{interactableObject.GetComponentInChildren<TextMesh>().text} added to Cart");
             Destroy(interactableObject);
         }
+    }
+
+    public void UpdateCart(List<string> Cart)
+    {
+        this.Cart = Cart;
     }
 
     private void DustbinHandler()

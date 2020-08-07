@@ -32,7 +32,8 @@ public static class Constants
 
     public const string Dustbin = "Dustbin";
     public const string SaladMixer = "SaladMixer";
-    public const string Salad = "Salad";
+    public const string SaladTag = "Salad";
+    public const string CustomerTag = "Customer";
 
     // raw vege
     public const string Tomato = "Tomato";
